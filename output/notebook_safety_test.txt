@@ -1,0 +1,25 @@
+PASS: both dashboard cells execute without removing any cells; five models trained once in total.
+PASS: dashboards share trained models but have independent controls and test frames.
+PASS: both dashboards show all six expected metrics for all five classifiers.
+PASS: rejected fractional targets in both dashboards.
+PASS: rejected out-of-range targets in both dashboards.
+PASS: rejected missing target values in both dashboards.
+PASS: rejected non-numeric target in both dashboards.
+PASS: rejected empty rows in both dashboards.
+PASS: rejected missing feature in both dashboards.
+PASS: rejected missing feature values in both dashboards.
+PASS: rejected infinite feature in both dashboards.
+PASS: rejected non-numeric feature in both dashboards.
+PASS: metrics require targets; optional feature-only preview remains available in the CSV dashboard.
+PASS: single-class test data renders safely with undefined AUC.
+PASS: upload, reset and repeat upload work; the simple dashboard remains unchanged.
+PASS: downloaded prediction CSVs can be evaluated again without duplicate-column errors.
+PASS: invalid uploaded labels produce a visible validation error.
+PASS: bundled saved models, test data and metrics were not modified.
+Scope: setup/install cell preserved and dependencies checked; both dashboard cells executed in a temporary namespace. This is a local safety check, not BITS Lab evidence.
+
+Additional re-audit:
+PASS: notebook cells run in order [2].
+PASS: notebook cells run in order [3].
+PASS: notebook cells run in order [3, 2].
+PASS: interactive model selection, CSV upload and reset do not retrain models.

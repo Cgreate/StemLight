@@ -29,10 +29,10 @@ Dataset attribution: Wolberg, Mangasarian, Street and Street (1993), Breast Canc
 ## c. GitHub repository and live application
 
 - [GitHub repository](https://github.com/Cgreate/StemLight)
-- [Live Streamlit application](https://stemlight-h2ws5czypgsnms5sjwhzab.streamlit.app/)
+- [Live Streamlit application](https://stemlight-adzva7eonekvappgc3xpzg.streamlit.app/)
 - Streamlit entry point: `app.py`; deployment branch: `main`; cloud Python version: 3.12.
 
-This local README, the new training script and the submission draft are pending the user's approval for a GitHub push. Do not assume these local additions are already available at the repository link.
+The deployed Streamlit app and training source are already on GitHub. The latest local notebook, documentation and PDF-draft changes require the user's approval before they are pushed.
 
 ## d. Models used and evaluation
 
@@ -96,7 +96,15 @@ python -m streamlit run app.py
 
 The default view evaluates the bundled held-out test CSV. Select **Upload CSV** to evaluate another test CSV containing the same 30 feature columns and a `target` column. The app validates inputs, loads the selected saved model, displays the six metrics plus confusion matrix and classification report, and provides downloadable predictions. It never calls the training script or fits a model on uploaded data.
 
-The minimum frontend features are present: CSV upload, classifier dropdown, evaluation metrics, confusion matrix and classification report. Use the dropdown to view results for each model on the selected test data.
+The frontend includes CSV upload, classifier dropdown, all six evaluation metrics, an all-model comparison table, a Matplotlib/Seaborn confusion-matrix heatmap, classification report, and downloadable comparison/prediction CSVs. All five models are evaluated on the same selected test rows.
+
+## Notebook safety testing
+
+`main.ipynb` is retained with both dashboards. Run its setup cell in a standard Jupyter environment, then the two dashboard cells. The models are trained once per kernel and reused by both dashboards; restart the kernel to train again. The simple dashboard keeps its own widget state so CSV uploads in the second dashboard do not change its test data.
+
+Both dashboards validate numeric features, reject empty or non-finite inputs, and validate target values before converting them to integers. Decimal, missing, or out-of-range target values are rejected. The CSV dashboard retains a feature-only prediction preview when `target` is absent; metrics require the target column. The deployed Streamlit assignment frontend always requires `target` for uploaded test CSVs.
+
+The notebook uses `ipywidgets` installed by its setup cell. Streamlit's deployed frontend uses the packages in `requirements.txt`, including Matplotlib and Seaborn. Notebook execution and local safety tests do not constitute BITS Virtual Lab execution evidence.
 
 ## Repository files
 
@@ -109,7 +117,7 @@ The minimum frontend features are present: CSV upload, classifier dropdown, eval
 | `test_data.csv` | 114 held-out test rows, 30 inputs plus target |
 | `metrics.csv` | Six metrics per model, verified from bundled saved models |
 | `training_info.json` | Metadata for the bundled models and split |
-| `stremlight.ipynb` | Online Jupyter variant; its `piplite` setup is for JupyterLite |
+| `main.ipynb` | Preserved Jupyter safety-test notebook with a simple dashboard and CSV dashboard; shares training results within one kernel |
 | `README.md` | Problem, dataset, results, observations and reproduction instructions |
 
 ## Submission status
